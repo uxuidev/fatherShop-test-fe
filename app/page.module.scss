@@ -23,7 +23,7 @@
 }
 
 .sign-up-form>div {
-    margin-top: 14px;
+    //margin-top: 14px;
 }
 
 .sign-up-form>div>input {
@@ -49,6 +49,18 @@
     margin-bottom: 25px;
 }
 
+.error-container {
+    position: relative;
+    margin-top: 20px;
+}
+.error-container > div {
+    color: red;
+    font-size: 12px;
+    //margin-top: 14px;
+    position: absolute;
+    bottom:0; text-align: center;width:100%;
+}
+
 .bottom-text {
     text-align: center;
     width: 100%;
@@ -65,6 +77,15 @@
 
 .right-view>div>div>p {
     font-size: 20px;
+}
+
+.three-dot > span {
+    height: 12px; width: 12px;
+    border-radius: 6px;
+    background-color: $fontCol;
+    margin: 20px 0;
+    display: inline-block;
+    margin-right: 10px;
 }
 
 .collage-container {

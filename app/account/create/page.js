@@ -10,6 +10,7 @@ import { useState } from "react";
 import { collage1, collage2, collage3 } from "@/data/collage";
 
 const Create = () => {
+    const [initLoad, setInitLoad] = useState(true)
     const [user, setUser] = useState({
         fullName: '',
         mob: '',
@@ -26,6 +27,43 @@ const Create = () => {
         });
     };
 
+    const isValidMob = (mob) => {
+        const regex = /^(0|\+|00)?(\d{10}|\d{6,14})$/;
+        return regex.test(mob);
+      };
+
+    const isValidEmail = (email) => {
+        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return regex.test(email);
+    };
+
+    const isValidPW = (pw) => {
+        return pw.length >= 8;
+    };
+
+    const submitHandler = e => {
+        e.preventDefault();
+        setInitLoad(false)
+
+        // Perform form validation
+        if (user.fullName.trim() === '') {
+            return;
+        }
+        if (user.mob.trim() === '') {
+            return;
+        }
+        if (user.email.trim() === '') {
+            return;
+        }
+        if (user.pw.trim() === '') {
+            return;
+        }
+        
+        !isValidMob(user.mob) && setUser({...user, mob: ''})
+        !isValidEmail(user.email) && setUser({...user, email: ''})
+        !isValidPW(user.pw) && setUser({...user, pw: ''})
+    };
+
     return (
         <div className="container-fluid" style={{ fontFamily: 'Noto Sans, sans-serif' }}>
             <div className="row">
@@ -40,12 +78,21 @@ const Create = () => {
                     <div className={`row ${styles['centered-row']}`}>
                         <div className="col-12 col-md-10 col-lg-8 col-xl-6 text-center">
                             <div><img src="/imgs/logo/fathershop-white-logo2.png" alt="Logo" style={{ width: '245px', height: 'auto' }} /></div>
-                            <div className={styles['sign-up']} style={{fontWeight: '500'}}>Sign Up</div>
-                            <form className={styles['sign-up-form']}>
+                            <div className={styles['sign-up']} style={{ fontWeight: '500' }}>Sign Up</div>
+                            <form className={styles['sign-up-form']} onSubmit={submitHandler}>
+
+                                <div className={styles['error-container']}><div style={{ display: initLoad? 'none': user.fullName? 'none':'block' }}>Name is required</div></div>
                                 <div><input type="text" name="fullName" value={user.fullName} onChange={changeHandler} placeholder="Full Name" maxLength="50" /></div>
-                                <div><input type="phone" name="mob" value={user.mob} onChange={changeHandler} maxLength="10" id="phone" /></div>
+
+                                <div className={styles['error-container']}><div style={{ display: initLoad? 'none': user.mob? 'none':'block' }}>Valid phone number is required</div></div>
+                                <div><input type="phone" name="mob" value={user.mob} onChange={changeHandler} maxLength="15" /></div>
+
+                                <div className={styles['error-container']}><div style={{ display: initLoad? 'none': user.email? 'none':'block' }}>Valid email is required</div></div>
                                 <div><input type="email" name="email" value={user.email} onChange={changeHandler} placeholder="email" maxLength="70" /></div>
+
+                                <div className={styles['error-container']}><div style={{ display: initLoad? 'none': user.pw? 'none':'block' }}>Password at least 8 characters is required</div></div>
                                 <div><input type="password" name="pw" value={user.pw} onChange={changeHandler} placeholder="Password" maxLength="30" /></div>
+
                                 <div><input type="submit" className={styles['btn-create']} value="Create Account" /></div>
                             </form>
                             <span style={{ fontWeight: '300', fontSize: '14px' }}>Already have an account</span> <span style={{ fontWeight: '400', fontSize: '14px' }}>Login</span>
@@ -67,6 +114,7 @@ const Create = () => {
                                 to Dropship. Millions of Product Ready to Dropship.</p>
                         </div>
                     </div>
+                    <div className="row"><div className={`col ms-5 g-0 ${styles['three-dot']}`}><span></span><span></span><span></span></div></div>
                     <div className={`row ${styles['collage-container']}`}>
                         <div className="col-4">
                             {
