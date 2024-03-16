@@ -1,0 +1,88 @@
+@import '/assets/fonts';
+@import '/assets/colors';
+
+.lan {
+    font-size: 14px;
+    padding: 20px;
+}
+
+.lan>img {
+    padding: 10px;
+}
+
+.centered-row {
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    font-family: $noto-sans;
+    color: $primary;
+}
+
+.sign-up-form {
+    margin-bottom: 7px;
+}
+
+.sign-up-form>div {
+    margin-top: 14px;
+}
+
+.sign-up-form>div>input {
+    width: 286px;
+    height: 44px;
+    background-color: $input;
+    border: none;
+    border-radius: 8px;
+    padding: 11px 12px;
+}
+
+.btn-create {
+    background-color: black !important;
+    margin-top: 22px;
+    color: white;
+}
+
+.sign-up {
+    font-weight: 500;
+    color: $primary;
+    font-size: 28px;
+    margin-top: 40px;
+    margin-bottom: 25px;
+}
+
+.bottom-text {
+    text-align: center;
+    width: 100%;
+    margin: 50px 0;
+    color: $fontCol;
+}
+
+.right-view {
+    background-color: $bg-dark;
+    //height: 100vh;
+    //padding: 70px 40px;
+    color: white;
+}
+
+.right-view>div>div>p {
+    font-size: 20px;
+}
+
+.collage-container {
+    max-height: 500px;
+    overflow: hidden;
+}
+
+.collage-container>div>div>img {
+    border-radius: 8px;
+}
+
+@media (min-width: 992px) {
+    .collage-container {
+        max-height: 1000px;
+        overflow: hidden;
+    }
+
+    .collage-container>div>div>img {
+        border-radius: 16px;
+    }
+}

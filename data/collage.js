@@ -1,0 +1,60 @@
+export const collage1 = [
+    {
+        src:'/imgs/collage1/1.jpg'
+    },
+    {
+        src:'/imgs/collage1/2.jpg'
+    },
+    {
+        src:'/imgs/collage1/3.jpg'
+    },
+    {
+        src:'/imgs/collage1/4.jpg'
+    },
+    {
+        src:'/imgs/collage1/5.jpg'
+    },
+    {
+        src:'/imgs/collage1/6.jpg'
+    },
+    {
+        src:'/imgs/collage1/7.jpg'
+    },
+]
+export const collage2 = [
+    {
+        src:'/imgs/collage2/1.jpg'
+    },
+    {
+        src:'/imgs/collage2/2.jpg'
+    },
+    {
+        src:'/imgs/collage2/3.jpg'
+    },
+    {
+        src:'/imgs/collage2/4.jpg'
+    },
+    {
+        src:'/imgs/collage2/5.jpg'
+    },
+    {
+        src:'/imgs/collage2/6.jpg'
+    },
+]
+export const collage3 = [
+    {
+        src:'/imgs/collage3/1.jpg'
+    },
+    {
+        src:'/imgs/collage3/2.jpg'
+    },
+    {
+        src:'/imgs/collage3/3.jpg'
+    },
+    {
+        src:'/imgs/collage3/4.jpg'
+    },
+    {
+        src:'/imgs/collage3/5.jpg'
+    },
+]
