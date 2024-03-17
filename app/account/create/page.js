@@ -84,7 +84,7 @@ const Create = () => {
 
     useEffect(() => {
         fetchUsersRequest();
-        console.log(getState().users);
+        //console.log(getState().users);
     }, [])
 
     const users = getState().users;

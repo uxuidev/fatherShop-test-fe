@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 const FlagsMenu = ({ flags, setSelectedFlag }) => {
   const [id, setId] = useState(null);
-console.log(id)
+
   return (
     <div className={styles['flags-menu']}>
       {
