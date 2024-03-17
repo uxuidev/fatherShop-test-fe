@@ -8,11 +8,23 @@ import '@fontsource/noto-sans/500.css';
 import '@fontsource/noto-sans/600.css';
 import { useState, useEffect } from "react";
 import { collage1, collage2, collage3 } from "@/data/collage";
-import { addUserRequest, fetchUsersRequest } from '@/redux/actions'
-import { getState } from '@/redux/store'
+import { flags } from "@/data/flags";
+import FlagsMenu from "@/components/FlagsMenu";
+//import { addUserRequest, fetchUsersRequest } from '@/redux/actions'
+//import { getState } from '@/redux/store'
 
 const Create = () => {
-    const [initLoad, setInitLoad] = useState(true)
+    const [initLoad, setInitLoad] = useState(true);
+    const [showFlags, setShowFlags] = useState(false);
+    const [selectedFlag, setSelectedFlag] = useState(
+        {
+            id: 1,
+            country: 'United Arab Emirates',
+            code: '+971',
+            A2: 'AE',
+            src: '/imgs/flags/ae.svg',
+        }
+    )
     const [user, setUser] = useState({
         fullName: '',
         mob: '',
@@ -32,7 +44,7 @@ const Create = () => {
     const isValidMob = (mob) => {
         const regex = /^(0|\+|00)?(\d{10}|\d{6,14})$/;
         return regex.test(mob);
-      };
+    };
 
     const isValidEmail = (email) => {
         const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -60,18 +72,22 @@ const Create = () => {
         if (user.pw.trim() === '') {
             return;
         }
-        
-        !isValidMob(user.mob) && setUser({...user, mob: ''})
-        !isValidEmail(user.email) && setUser({...user, email: ''})
-        !isValidPW(user.pw) && setUser({...user, pw: ''})
 
-        addUserRequest(user)
+        !isValidMob(user.mob) && setUser({ ...user, mob: '' })
+        !isValidEmail(user.email) && setUser({ ...user, email: '' })
+        !isValidPW(user.pw) && setUser({ ...user, pw: '' })
+
+        //addUserRequest(user)
 
     };
 
-    useEffect(() => {
-        fetchUsersRequest();
-      }, [])
+    /*     useEffect(() => {
+            fetchUsersRequest();
+            console.log(getState().users);
+          }, [])
+    
+          const users = getState().users;
+          console.log(users) */
 
     return (
         <div className="container-fluid" style={{ fontFamily: 'Noto Sans, sans-serif' }}>
@@ -90,16 +106,27 @@ const Create = () => {
                             <div className={styles['sign-up']} style={{ fontWeight: '500' }}>Sign Up</div>
                             <form className={styles['sign-up-form']} onSubmit={submitHandler}>
 
-                                <div className={styles['error-container']}><div style={{ display: initLoad? 'none': user.fullName? 'none':'block' }}>Name is required</div></div>
+                                <div className={styles['error-container']}><div style={{ display: initLoad ? 'none' : user.fullName ? 'none' : 'block' }}>Name is required</div></div>
                                 <div><input type="text" name="fullName" value={user.fullName} onChange={changeHandler} placeholder="Full Name" maxLength="50" /></div>
 
-                                <div className={styles['error-container']}><div style={{ display: initLoad? 'none': user.mob? 'none':'block' }}>Valid phone number is required</div></div>
-                                <div><input type="phone" name="mob" value={user.mob} onChange={changeHandler} maxLength="15" /></div>
+                                <div className={styles['error-container']}><div style={{ display: initLoad ? 'none' : user.mob ? 'none' : 'block' }}>Valid phone number is required</div></div>
 
-                                <div className={styles['error-container']}><div style={{ display: initLoad? 'none': user.email? 'none':'block' }}>Valid email is required</div></div>
+
+                                <div className={styles['flag-container']} onClick={()=>setShowFlags(!showFlags)}>
+                                    <input type="phone" name="mob" value={user.mob} onChange={changeHandler} maxLength="15" />
+                                    <div className={styles['flag']}>
+                                        <img src={selectedFlag.src} width="30" height="20" />
+                                        <img src="/imgs/lan/lan-down.svg" alt="dropdown" className="px-1"/>
+                                        <span style={{lineHeight: '44px'}}>{selectedFlag.code}</span>
+                                    </div>
+                                    <div className={styles['flags-menu']} style={{display: !showFlags && 'none'}}><FlagsMenu flags={flags} setSelectedFlag={setSelectedFlag} /></div>
+                                </div>
+
+
+                                <div className={styles['error-container']}><div style={{ display: initLoad ? 'none' : user.email ? 'none' : 'block' }}>Valid email is required</div></div>
                                 <div><input type="email" name="email" value={user.email} onChange={changeHandler} placeholder="email" maxLength="70" /></div>
 
-                                <div className={styles['error-container']}><div style={{ display: initLoad? 'none': user.pw? 'none':'block' }}>Password at least 8 characters is required</div></div>
+                                <div className={styles['error-container']}><div style={{ display: initLoad ? 'none' : user.pw ? 'none' : 'block' }}>Password at least 8 characters is required</div></div>
                                 <div><input type="password" name="pw" value={user.pw} onChange={changeHandler} placeholder="Password" maxLength="30" /></div>
 
                                 <div><input type="submit" className={styles['btn-create']} value="Create Account" /></div>

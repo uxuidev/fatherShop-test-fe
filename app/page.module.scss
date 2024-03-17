@@ -20,14 +20,16 @@
 
 .sign-up-form {
     margin-bottom: 7px;
+    max-width: 286px;
+    margin: auto;
 }
 
-.sign-up-form>div {
-    //margin-top: 14px;
+.input-container {
+    width: 286px;
 }
 
 .sign-up-form>div>input {
-    width: 286px;
+    width: 100%;
     height: 44px;
     background-color: $input;
     border: none;
@@ -95,6 +97,30 @@
 
 .collage-container>div>div>img {
     border-radius: 8px;
+}
+
+.flag-container {
+    position: relative;
+}
+
+.flag-container > input {
+    padding-left: 90px !important;
+}
+
+.flag {
+    position: absolute;
+    left: 3px;
+    top: 0px;
+    //padding: 3px;
+}
+
+.flag > img {
+    border-radius: 10px;
+}
+
+.flags-menu {
+    position:absolute;
+    top: 44px;    
 }
 
 @media (min-width: 992px) {
