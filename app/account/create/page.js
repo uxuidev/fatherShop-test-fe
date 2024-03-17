@@ -10,8 +10,9 @@ import { useState, useEffect } from "react";
 import { collage1, collage2, collage3 } from "@/data/collage";
 import { flags } from "@/data/flags";
 import FlagsMenu from "@/components/FlagsMenu";
-//import { addUserRequest, fetchUsersRequest } from '@/redux/actions'
-//import { getState } from '@/redux/store'
+import { addUserRequest, fetchUsersRequest } from '@/redux/actions'
+import { getState } from '@/redux/store'
+import Head from 'next/head';
 
 const Create = () => {
     const [initLoad, setInitLoad] = useState(true);
@@ -77,20 +78,26 @@ const Create = () => {
         !isValidEmail(user.email) && setUser({ ...user, email: '' })
         !isValidPW(user.pw) && setUser({ ...user, pw: '' })
 
-        //addUserRequest(user)
+        addUserRequest(user)
 
     };
 
-    /*     useEffect(() => {
-            fetchUsersRequest();
-            console.log(getState().users);
-          }, [])
-    
-          const users = getState().users;
-          console.log(users) */
+    useEffect(() => {
+        fetchUsersRequest();
+        console.log(getState().users);
+    }, [])
+
+    const users = getState().users;
+    //console.log(users)
 
     return (
         <div className="container-fluid" style={{ fontFamily: 'Noto Sans, sans-serif' }}>
+            <Head>
+                <title>Father Shops Sign Up</title>
+                <meta name="description" content="This is a description of my page" />
+                <meta name="description" content="Father Shops is the premier ecommerce platform for all things Dad. From tools to tech gadgets, sporting goods to grill accessories, we've got everything you need to celebrate the father figure in your life." />
+                <meta name="keywords" content="Ecommerce, Online Shopping, Father Shops, Dad Gifts, Tools, Tech Gadgets, Sporting Goods, Grill Accessories, Father's Day, Gifts for Dad" />
+            </Head>
             <div className="row">
                 <div className="col-12 col-lg-6">
                     <div className="row">
@@ -112,14 +119,14 @@ const Create = () => {
                                 <div className={styles['error-container']}><div style={{ display: initLoad ? 'none' : user.mob ? 'none' : 'block' }}>Valid phone number is required</div></div>
 
 
-                                <div className={styles['flag-container']} onClick={()=>setShowFlags(!showFlags)}>
+                                <div className={styles['flag-container']} onClick={() => setShowFlags(!showFlags)}>
                                     <input type="phone" name="mob" value={user.mob} onChange={changeHandler} maxLength="15" />
                                     <div className={styles['flag']}>
                                         <img src={selectedFlag.src} width="30" height="20" />
-                                        <img src="/imgs/lan/lan-down.svg" alt="dropdown" className="px-1"/>
-                                        <span style={{lineHeight: '44px'}}>{selectedFlag.code}</span>
+                                        <img src="/imgs/lan/lan-down.svg" alt="dropdown" className="px-1" />
+                                        <span style={{ lineHeight: '44px' }}>{selectedFlag.code}</span>
                                     </div>
-                                    <div className={styles['flags-menu']} style={{display: !showFlags && 'none'}}><FlagsMenu flags={flags} setSelectedFlag={setSelectedFlag} /></div>
+                                    <div className={styles['flags-menu']} style={{ display: !showFlags && 'none' }}><FlagsMenu flags={flags} setSelectedFlag={setSelectedFlag} /></div>
                                 </div>
 
 
