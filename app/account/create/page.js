@@ -6,8 +6,10 @@ import '@fontsource/noto-sans/300.css';
 import '@fontsource/noto-sans/400.css';
 import '@fontsource/noto-sans/500.css';
 import '@fontsource/noto-sans/600.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { collage1, collage2, collage3 } from "@/data/collage";
+import { addUserRequest, fetchUsersRequest } from '@/redux/actions'
+import { getState } from '@/redux/store'
 
 const Create = () => {
     const [initLoad, setInitLoad] = useState(true)
@@ -62,7 +64,14 @@ const Create = () => {
         !isValidMob(user.mob) && setUser({...user, mob: ''})
         !isValidEmail(user.email) && setUser({...user, email: ''})
         !isValidPW(user.pw) && setUser({...user, pw: ''})
+
+        addUserRequest(user)
+
     };
+
+    useEffect(() => {
+        fetchUsersRequest();
+      }, [])
 
     return (
         <div className="container-fluid" style={{ fontFamily: 'Noto Sans, sans-serif' }}>
