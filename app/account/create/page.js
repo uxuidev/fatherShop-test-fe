@@ -35,7 +35,7 @@ const Create = () => {
 
     const changeHandler = (e) => {
         const { name, value } = e.target;
-        const prevUser = { ...user }
+        const prevUser = { ...user };
         setUser({
             ...prevUser,
             [name]: value,
@@ -91,7 +91,7 @@ const Create = () => {
     //console.log(users)
 
     return (
-        <div className="container-fluid" style={{ fontFamily: 'Noto Sans, sans-serif' }}>
+        <div className="container-fluid" style={{ fontFamily: 'Noto Sans, sans-serif' }} onClick={()=> showFlags && setShowFlags(false)}>
             <Head>
                 <title>Father Shops Sign Up</title>
                 <meta name="description" content="This is a description of my page" />
@@ -119,14 +119,14 @@ const Create = () => {
                                 <div className={styles['error-container']}><div style={{ display: initLoad ? 'none' : user.mob ? 'none' : 'block' }}>Valid phone number is required</div></div>
 
 
-                                <div className={styles['flag-container']} onClick={() => setShowFlags(!showFlags)}>
+                                <div className={styles['flag-container']}>
                                     <input type="phone" name="mob" value={user.mob} onChange={changeHandler} maxLength="15" />
-                                    <div className={styles['flag']}>
+                                    <div className={styles['flag']} onClick={() => setShowFlags(!showFlags)}>
                                         <img src={selectedFlag.src} width="30" height="20" />
                                         <img src="/imgs/lan/lan-down.svg" alt="dropdown" className="px-1" />
                                         <span style={{ lineHeight: '44px' }}>{selectedFlag.code}</span>
                                     </div>
-                                    <div className={styles['flags-menu']} style={{ display: !showFlags && 'none' }}><FlagsMenu flags={flags} setSelectedFlag={setSelectedFlag} /></div>
+                                    <div className={styles['flags-menu']} style={{ display: !showFlags && 'none' }}><FlagsMenu setShowFlags={setShowFlags} flags={flags} setSelectedFlag={setSelectedFlag} /></div>
                                 </div>
 
 

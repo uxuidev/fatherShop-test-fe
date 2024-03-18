@@ -1,14 +1,14 @@
 import styles from './menu.module.scss';
 import { useState } from 'react';
 
-const FlagsMenu = ({ flags, setSelectedFlag }) => {
+const FlagsMenu = ({ flags, setSelectedFlag, setShowFlags }) => {
   const [id, setId] = useState(null);
 
   return (
     <div className={styles['flags-menu']}>
       {
         flags.map(flag => (
-          <div className={styles['flags']} key={flag.id} onClick={()=>setSelectedFlag(flag)}>
+          <div className={styles['flags']} key={flag.id} onClick={()=>{setSelectedFlag(flag); setShowFlags(false)}}>
             <img src={flag.src} width="30" height="20" />
             <span className='p-1'>{flag.A2}</span>
             <span style={{ lineHeight: '30px' }}>{flag.code}</span>

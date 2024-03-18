@@ -120,7 +120,8 @@
 
 .flags-menu {
     position:absolute;
-    top: 44px;    
+    top: 44px;
+    z-index: 1;
 }
 
 @media (min-width: 992px) {
